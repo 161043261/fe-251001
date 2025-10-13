@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { JwtService } from '@nestjs/jwt';
 
@@ -6,6 +6,7 @@ import { JwtService } from '@nestjs/jwt';
 export class AuthService {
   constructor(private readonly jwtService: JwtService) {}
 
+  // curl http://localhost:3000/auth/login -X POST -H "Content-Type: application/json" -d '{"username": "usernameGetById", "password": "passwordGetById"}'
   login(loginAuthDto: LoginAuthDto) {
     const { username, password } = loginAuthDto;
 
@@ -15,10 +16,10 @@ export class AuthService {
       password: 'passwordGetById',
     };
     if (username !== userGetById.username) {
-      throw new HttpException('username error', 401);
+      throw new HttpException('username error', HttpStatus.BAD_REQUEST);
     }
     if (password !== userGetById.password) {
-      throw new HttpException('password error', 401);
+      throw new HttpException('password error', HttpStatus.BAD_REQUEST);
     }
     const token = this.jwtService.sign({ username, id: userGetById.id });
 
