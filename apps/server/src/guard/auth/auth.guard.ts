@@ -23,9 +23,8 @@ export class AuthGuard implements CanActivate {
       if (!token) {
         throw new Error('token is required');
       }
-      // const tokenWithoutBearer = token.slice('Bearer '.length);
-      // this.jwtService.verify(tokenWithoutBearer);
-      // req.user = payload;
+      const tokenWithoutBearer = token.slice('Bearer '.length);
+      this.jwtService.verify(tokenWithoutBearer, { secret: '161043261' });
     } catch (err) {
       Logger.error(err);
       throw new HttpException('authorized failed', HttpStatus.UNAUTHORIZED);

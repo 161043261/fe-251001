@@ -11,7 +11,7 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { AuthGuard } from 'src/guard/auth/auth.guard';
+import { AuthGuard } from '../guard/auth/auth.guard';
 
 @Controller('user')
 export class UserController {
@@ -22,7 +22,7 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  // curl http://localhost:3000/user -X GET -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJuYW1lR2V0QnlJZCIsImlkIjoxLCJpYXQiOjE3NTkwNTE3OTYsImV4cCI6MTc1OTY1NjU5Nn0.-bWff9-qFz-eRldrDT1RUbPwCEtNMIvw_rY34D3iQ-4"
+  // curl http://localhost:3000/user -X GET -H "Authorization: Bearer <token>"
   @Get()
   @UseGuards(AuthGuard)
   findAll() {

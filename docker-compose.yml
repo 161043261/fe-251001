@@ -1,0 +1,22 @@
+services:
+  # docker compose up mysql -d
+  mysql:
+    image: 'mysql:latest'
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=db0
+      - MYSQL_USER=whoami
+      - MYSQL_PASSWORD=pass
+      - MYSQL_RANDOM_ROOT_PASSWORD="yes"
+  # docker compose down mysql -v
+
+  # docker-compose up -d redis
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    restart: always
+  # docker-compose down redis -v
