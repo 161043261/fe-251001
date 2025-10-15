@@ -22,4 +22,5 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false
   },
+  "include": ["src/**/*", "prisma/generated/prisma/**/*"]
 }
